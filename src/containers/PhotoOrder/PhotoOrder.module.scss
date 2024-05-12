@@ -1,0 +1,401 @@
+@import "../../resources/styles/colors";
+@import "../../resources/styles/variables";
+@import "../../resources/styles/mixins";
+
+$content-width: 1188px;
+$plus-product-thumbnail-size: 180px;
+$plus-product-thumbnail-margin: 15px;
+$plus-product-area-width: 410px;
+
+$plus-pfyoon-product-thumbnail-size: 130px;
+$plus-pfyoon-product-thumbnail-margin: 15px;
+$plus-pfyoon-product-area-width: 430px;
+
+$order-type-select-area-width: $content-width - $plus-product-area-width;
+$order-type-select-area-preview-image-width: 185px;
+$order-type-select-area-summary-width: $order-type-select-area-width -
+  $order-type-select-area-preview-image-width;
+
+.PhotoOrder {
+  position: fixed;
+  top: $gnb-height;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: $white;
+  overflow-y: scroll;
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    padding: 0;
+    color: $dark-grey;
+    font-weight: normal;
+    line-height: 1.8;
+  }
+
+  h1 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  h4 {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .Content {
+    display: flex;
+    flex-direction: column;
+    width: $content-width;
+    min-width: $content-width;
+    margin-top: 34px;
+    text-align: left;
+    &.Mobile {
+      width: 100%;
+      min-width: 0;
+      margin-top: 0;
+      padding: 0 16px;
+      .ProductOptions {
+        width: 100%;
+        .OrderTypeSelectArea {
+          width: 100%;
+          .OrderTypeOption.isSelected {
+            background-color: #e1e1e1;
+            border-radius: 4px;
+          }
+          .OrderTypeOption {
+            width: 100%;
+            margin-top: 10px;
+          }
+        }
+      }
+      .OrderInformation {
+        width: 100%;
+        padding: 0 16px;
+        .OrderTable {
+          padding: 0;
+          min-width: auto;
+          .Row {
+            padding: 20px;
+            font-size: toRem(14);
+            color: #484848;
+            & > div {
+              min-width: 0;
+            }
+            &.TotalPrice {
+              border-top-width: 1px;
+              margin: 0;
+              padding: 40px 0;
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+
+    .ProductOptions {
+      display: block;
+      width: $content-width;
+      &.Mobile {
+        width: 100%;
+      }
+
+      %Area {
+        display: inline-block;
+        width: $content-width / 2;
+        float: left;
+      }
+
+      .OrderTypeSelectArea {
+        @extend %Area;
+        width: $order-type-select-area-width;
+        &.Mobile {
+          .OrderTypeOption .Summary {
+            width: 100%;
+          }
+        }
+        .OrderTypeOption {
+          display: inline-block;
+          width: $order-type-select-area-width;
+          margin-top: 30px;
+          cursor: pointer;
+
+          &:first-child {
+            margin-top: 20px;
+          }
+
+          & > * {
+            display: inline-block;
+            float: left;
+          }
+
+          &.isSelected {
+            .PreviewImage {
+              .PreviewImageMask {
+                visibility: visible;
+              }
+            }
+          }
+
+          .PreviewImage {
+            position: relative;
+            width: $order-type-select-area-preview-image-width;
+            height: 120px;
+            @include useImage(185px, 120px);
+
+            .PreviewImageMask {
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              background: $black-30;
+              visibility: hidden;
+
+              .CheckBox {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+              }
+            }
+          }
+
+          .Summary {
+            width: $order-type-select-area-summary-width;
+            padding: 4px 18px;
+            font-size: 13px;
+            text-align: left;
+            color: $mild-dark-grey;
+
+            ul {
+              margin-left: 0;
+              margin-top: 12px;
+            }
+          }
+          .SummaryRed {
+            width: $order-type-select-area-summary-width;
+            padding: 4px 18px;
+            font-size: 13px;
+            text-align: left;
+            color: red;
+
+            ul {
+              margin-left: 0;
+              margin-top: 12px;
+            }
+          }
+        }
+      }
+
+      .PlusProductArea {
+        @extend %Area;
+        width: $plus-product-area-width;
+        min-width: $plus-product-area-width;
+
+        .PlusProducts {
+          margin-top: 25px;
+          color: $dark-grey;
+
+          .Product {
+            display: inline-block;
+            float: left;
+            text-align: center;
+
+            &:not(:first-child) {
+              margin-left: 15px;
+            }
+
+            .Thumbnail {
+              width: $plus-product-thumbnail-size;
+              height: $plus-product-thumbnail-size;
+              @include useImage(
+                $plus-product-thumbnail-size,
+                $plus-product-thumbnail-size
+              );
+            }
+
+            .ProductName {
+              margin-top: 15px;
+              font-size: 13px;
+              text-align: center;
+              line-height: 17px;
+              width: $plus-product-thumbnail-size;
+            }
+
+            .ProductPrice {
+              margin-top: 5px;
+              font-size: 15px;
+              text-align: center;
+              line-height: 15px;
+            }
+
+            .Counter {
+              width: 20px + 30px + 20px;
+              height: 21px;
+              margin-top: 14px;
+            }
+          }
+        }
+
+        .PFYoonPlusProducts {
+          margin-top: 25px;
+          color: $dark-grey;
+
+          .Product {
+            display: inline-block;
+
+            text-align: center;
+            margin-left: 5px;
+
+            .Thumbnail {
+              width: $plus-pfyoon-product-thumbnail-size;
+              height: $plus-pfyoon-product-thumbnail-size;
+              @include useImage(
+                $plus-pfyoon-product-thumbnail-size,
+                $plus-pfyoon-product-thumbnail-size
+              );
+            }
+
+            .ProductName {
+              margin-top: 15px;
+              font-size: 12px;
+              text-align: center;
+              line-height: 17px;
+              width: $plus-pfyoon-product-thumbnail-size;
+            }
+
+            .ProductPrice {
+              margin-top: 5px;
+              font-size: 15px;
+              text-align: center;
+              line-height: 15px;
+            }
+
+            .Counter {
+              width: 20px + 30px + 20px;
+              height: 21px;
+              margin-top: 14px;
+            }
+          }
+        }
+      }
+    }
+
+    .OrderInformation {
+      display: block;
+      width: $content-width;
+      margin-top: 50px;
+      text-align: left;
+      &.Mobile {
+        width: 100%;
+      }
+
+      .OrderTable {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 25px 0;
+        font-size: 15px;
+        color: $mild-dark-grey;
+        border-top: solid 1px $border;
+
+        .Row {
+          display: flex;
+          flex-direction: row;
+          padding: 0 200px 10px;
+          font-size: 15px;
+          color: $mild-dark-grey;
+
+          & > div {
+            min-width: 180px;
+            text-align: right;
+          }
+
+          & > div:first-child {
+            flex-grow: 1;
+            text-align: left;
+          }
+
+          &.TotalPrice {
+            padding-top: 35px;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: $dark-grey;
+            border-top: solid 2px $border;
+
+            & > div:last-child {
+              color: $coral;
+              font-size: 30px;
+
+              & > span {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .Actions {
+      display: block;
+      width: $content-width;
+      margin-bottom: 34px;
+      text-align: center;
+      &.Mobile {
+        width: 100%;
+        display: flex;
+        margin: 0;
+        padding: 10px 30px 20px;
+        button {
+          font-size: toRem(14);
+          border-radius: 4px;
+          font-weight: 400;
+        }
+      }
+
+      button {
+        width: 240px;
+        height: 50px;
+        font-size: 17px;
+        font-weight: bold;
+
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+.Mtable {
+  max-width: 100%;
+  overflow-x: auto;
+  table {
+    width: 100%;
+    th {
+      background-color: #e1e1e1;
+      color: #333333;
+      min-width: 80px;
+    }
+    td {
+      background-color: #f8f8f8;
+      color: #333333;
+      min-width: 65px;
+      &.red {
+        color: #f64027;
+      }
+    }
+  }
+}

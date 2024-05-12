@@ -1,0 +1,5 @@
+export default {
+  ALL_PHOTOS: 'ALL_PHOTOS',
+  ALBUMS: 'ALBUMS',
+  PHOTOS_IN_ALBUMS: 'PHOTOS_IN_ALBUMS',
+};

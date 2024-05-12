@@ -1,0 +1,17 @@
+@import '../../resources/styles/colors';
+
+.Divider {
+  border-color: $border;
+  border-style: solid;
+  border-width: 0;
+}
+
+.row {
+  border-right-width: 1px;
+  height: 100%;
+}
+
+.column {
+  border-bottom-width: 1px;
+  width: 100%;
+}

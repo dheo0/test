@@ -1,0 +1,45 @@
+@import '../../resources/styles/colors';
+
+$switch-width: 30px;
+$bar-height: 9px;
+$control-size: 15px;
+
+.Switch {
+  width: $switch-width;
+  height: $control-size;
+  position: relative;
+  user-select: none;
+
+  &[data-value="true"] {
+    .Control {
+      transform: translateX($switch-width - $control-size);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .Control {
+      cursor: not-allowed;
+    }
+  }
+
+  .Bar {
+    width: $switch-width;
+    height: 10px;
+    position: absolute;
+    top: calc(50% - #{$bar-height / 2});
+    border-radius: 4.5px;
+    background-color: $lemon;
+  }
+
+  .Control {
+    width: $control-size;
+    height: $control-size;
+    position: absolute;
+    background-size: $control-size;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: transform .08s ease-in-out;
+  }
+}

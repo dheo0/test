@@ -1,0 +1,64 @@
+@import "../../../../../resources/styles/colors";
+@import "../../../../../resources/styles/mixins";
+
+$appender-check-width: 150px;
+$appender-check-height: 164px;
+$appender-check-margin-right: 25px;
+
+.AppenderCheckWrapper {
+  display: inline-block;
+  width: ($appender-check-width * 2) + $appender-check-margin-right;
+  height: $appender-check-height;
+  margin-bottom: 50px;
+  &.Mobile {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    margin: 20px auto 30px;
+    .AppenderCheck {
+      background-color: #fff;
+      border-radius: 4px;
+      border: 1px solid #e1e1e1;
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.AppenderCheck {
+  @include useImage($appender-check-width, $appender-check-height);
+  width: $appender-check-width;
+  height: $appender-check-height;
+  display: inline-block;
+  position: relative;
+  float: left;
+  cursor: pointer;
+
+  &:first-child {
+    margin-right: $appender-check-margin-right;
+  }
+
+  .Check {
+    @include useImage(20px, 20px);
+    position: relative;
+    left: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .Title {
+    position: absolute;
+    bottom: 0;
+    height: 44px;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.69;
+    letter-spacing: -0.3px;
+    text-align: center;
+    color: $dark-grey;
+  }
+}

@@ -1,0 +1,177 @@
+@import "../../resources/styles/colors";
+@import "../../resources/styles/mixins";
+
+$cropper-size: 470px;
+$cropper-wrapper-width: $cropper-size;
+$cropper-controls-height: 22px;
+$cropper-filters-height: 105px;
+$cropper-actions-height: 60px;
+
+.PhotoDetailEditor {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $black-88;
+  z-index: 200;
+}
+
+.Overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.CropperWrapper {
+  position: relative;
+  width: $cropper-wrapper-width;
+  height: $cropper-controls-height + $cropper-size + $cropper-filters-height +
+    $cropper-actions-height;
+  @include absoluteCenter();
+  &.Mobile {
+    width: 100%;
+    .CropperPadding {
+      width: 100%;
+      height: 250px;
+      padding: 0 45px;
+    }
+    .Controls {
+      padding: 0 26px;
+    }
+    .Filters {
+      padding: 0 30px;
+      height: 51px;
+    }
+  }
+
+  .Controls {
+    display: flex;
+    flex-direction: row;
+    height: $cropper-controls-height;
+    margin-bottom: 6px;
+    -webkit-user-drag: none;
+    user-select: none;
+
+    .RotateButton {
+      width: 20px;
+      height: 20px;
+      @include useImage(20px, 20px);
+      cursor: pointer;
+    }
+
+    .Gap {
+      flex-grow: 1;
+    }
+
+    .ZoomSliderWrapper {
+      $icon-size: 22px;
+      $icon-size-small: 15px;
+      $icon-margin-between-slider: 8px;
+      $slider-width: 80px;
+      $wrapper-height: $icon-size;
+
+      display: block;
+      position: relative;
+      width: 160px;
+      height: $wrapper-height;
+
+      .Slider {
+        position: absolute;
+        right: $icon-size + $icon-margin-between-slider;
+        width: $slider-width;
+        height: $icon-size;
+      }
+
+      .Icon {
+        &:first-child {
+          width: $icon-size-small;
+          height: $icon-size-small;
+          position: absolute;
+          top: ($wrapper-height - $icon-size-small) / 2;
+          right: $icon-size + ($icon-margin-between-slider * 2) + $slider-width;
+        }
+
+        &:last-child {
+          width: $icon-size;
+          height: $icon-size;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  .CropperPadding {
+    position: relative;
+    width: $cropper-size;
+    height: $cropper-size;
+
+    .Cropper {
+      width: $cropper-size;
+      height: $cropper-size;
+      @include absoluteCenter();
+    }
+
+    .Mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+
+      &.gloss {
+        @include paperGloss();
+      }
+
+      &.border {
+        border: solid 1px $black;
+      }
+
+      &.insertDate {
+        .PhotoDate {
+          visibility: visible;
+        }
+      }
+
+      .PhotoDate {
+        position: absolute;
+        display: inline-block;
+        visibility: hidden;
+        right: 10px;
+        color: $black;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .Filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: $cropper-filters-height;
+    padding: 15px 30px;
+  }
+
+  .Actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: $cropper-actions-height;
+    margin-top: 20px;
+
+    button {
+      width: 84px;
+      height: 40px;
+
+      &:first-child {
+        width: 104px;
+        margin-right: 6px;
+      }
+    }
+  }
+}

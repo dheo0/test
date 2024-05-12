@@ -1,0 +1,52 @@
+$white: #FFFFFF;
+$light-grey: #FAFAFA;
+$grey: #EEEEEE;
+$mild-dark-grey: #666666;
+$mild-dark-grey2: #777777;
+$dark-grey: #333333;
+$black: black;
+$black-05: rgba(0, 0, 0, 0.05);
+$black-16: rgba(0, 0, 0, 0.16);
+$black-20: rgba(0, 0, 0, 0.20);
+$black-25: rgba(0, 0, 0, 0.25);
+$black-30: rgba(0, 0, 0, 0.30);
+$black-35: rgba(0, 0, 0, 0.35);
+$black-40: rgba(0, 0, 0, 0.40);
+$black-50: rgba(0, 0, 0, 0.50);
+$black-70: rgba(0, 0, 0, 0.70);
+$black-88: rgba(0, 0, 0, 0.88);
+$black-90: rgba(0, 0, 0, 0.90);
+$light: #98A7B3;
+$coral: #EE5F53;
+$coral-hover: #EC3425;
+$yellow: #FFCA00;
+$yellow2: #FF9C00;
+$lemon: #FFE296;
+
+$dark-background: $grey;
+$border: #E0E0E0;
+$dark-border: $mild-dark-grey;
+$inactive-text: #999999;
+$dark-button: $mild-dark-grey;
+$dark-button-hover: $dark-grey;
+$dark-button-text: $white;
+$light-button: $white;
+$light-button-hover: #FDFDFD;
+$light-button-text: $mild-dark-grey;
+$light-button-text-hover: $dark-grey;
+$light-button-disabled: $grey;
+$light-button-disabled-text: $inactive-text;
+$light-button-disabled-border: $border;
+$grey-button: #ADADAD;
+$grey-button-hover: #999999;
+$grey-button-text: $white;
+$orange-button: $yellow;
+$orange-button-hover: #FFDE00;
+$orange-button-text: $black;
+$orange-button-text-hover: $black;
+
+//noinspection CssInvalidPseudoSelector,CssUnknownProperty
+:export {
+  BORDER: $border;
+  BLACK_25: $black-25;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "PhotoDetailEditor",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./PhotoDetailEditor.jsx"
+}

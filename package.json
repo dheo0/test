@@ -1,0 +1,58 @@
+{
+  "name": "photomon-print",
+  "version": "2024.02.08.01",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "create-react-class": "^15.6.3",
+    "env-cmd": "^8.0.2",
+    "immutable": "^4.0.0-rc.12",
+    "ismobilejs": "^1.0.3",
+    "lodash": "^4.17.15",
+    "memoize-one": "^5.0.2",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "numeral": "^2.0.6",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-app-polyfill": "^0.2.2",
+    "react-beforeunload": "^2.1.0",
+    "react-dom": "^16.8.4",
+    "react-image-crop": "^8.6.6",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "react-tooltip": "^3.11.0",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.0.2",
+    "reselect": "^4.0.0",
+    "styled-components": "^4.2.0",
+    "use-react-router": "^1.0.7",
+    "uuid": "^3.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "smartbox": "env-cmd .env.smartbox react-scripts start",
+    "build": "env-cmd .env.production react-scripts build && npm run build:bundle",
+    "build:dev": "env-cmd .env.development react-scripts build && npm run build:bundle",
+    "build:bundle": "webpack --config webpack.config.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie < 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.3",
+    "redux-logger": "^3.0.6",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack-cli": "^3.3.1"
+  }
+}

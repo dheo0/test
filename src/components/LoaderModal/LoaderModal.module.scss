@@ -1,0 +1,15 @@
+@import '../../resources/styles/colors';
+@import '../../resources/styles/mixins';
+
+.LoaderModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $black-20;
+}
+
+.Spinner {
+  @include absoluteCenter();
+}

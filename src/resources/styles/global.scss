@@ -1,0 +1,210 @@
+@import './colors.scss';
+@import './mixins.scss';
+@import './variables.scss';
+
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css');
+
+:global {
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-width: $page-min-width;
+    background-color: $grey;
+    font-size: 14px;
+    line-height: 1.42857;
+
+    &:lang(ko) {
+      font-family: 'Nanum Square', 'Avenir', 'Apple SD Gothic Neo', 'Nanum Barun Gothic', 'Helvetica', 'Arial', 'Malgun Gothic',
+      '맑은고딕', 돋움, Dotum, 'Noto Sans Japanese', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', メイリオ, sans-serif;
+    }
+
+    &:lang(ja) {
+      font-family: 'Nanum Square', 'Avenir Next', 'Noto Sans Japanese', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', メイリオ,
+      'Apple SD Gothic Neo', 'Nanum Barun Gothic', 'Helvetica,Arial', 'Malgun Gothic', '맑은고딕', 돋움, Dotum, sans-serif;
+    }
+
+    &:lang(en) {
+      font-family: 'Nanum Square', 'Avenir', 'Avenir Next', 'Helvetica', 'Arial', 'Apple SD Gothic Neo', 'Nanum Barun Gothic',
+      'Malgun Gothic', '맑은고딕', 돋움, Dotum, 'Noto Sans Japanese', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', メイリオ, sans-serif;
+    }
+  }
+
+  img {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+
+  p {
+    margin: 0 0 10px;
+  }
+
+  button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+  }
+
+  input {
+    border: solid 1px $border;
+
+    &[disabled] {
+      color: $inactive-text !important;
+      background-color: $dark-background !important;
+
+      &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: $inactive-text !important;
+      }
+
+      &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: $inactive-text !important;
+        opacity: 1;
+      }
+
+      &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: $inactive-text !important;
+        opacity: 1;
+      }
+
+      &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: $inactive-text !important;
+      }
+    }
+  }
+
+  button {
+    @include defaultButton();
+
+    &.dark {
+      @include buttonStyle(dark);
+    }
+
+    &.grey {
+      @include buttonStyle(grey);
+    }
+
+    &.orange {
+      @include buttonStyle(orange);
+    }
+
+    &.coral {
+      @include buttonStyle(coral);
+    }
+
+    &.coralLight {
+      @include buttonStyle(coralLight);
+    }
+  }
+
+  ol, ul {
+    margin: 0;
+    padding: 0;
+
+    & > li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  // IE10 에서 a 태그 안에 img에 border가 자동으로 들어가는 설정때문에 명시적으로 border를 제거
+  a {
+    img {
+      border: none;
+    }
+  }
+
+  a, a:hover, a:link {
+    text-decoration: none;
+  }
+
+  * {
+    box-sizing: border-box;
+
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: $light;
+    }
+
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color: $light;
+      opacity: 1;
+    }
+
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color: $light;
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: $light;
+    }
+
+    &:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+      color: $light;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    &::-webkit-contacts-auto-fill-button {
+      opacity: 0;
+    }
+  }
+
+  #root { /*  sass-lint:disable-line no-ids */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+
+  .hide, .hidden {
+    display: none !important;
+  }
+
+  @keyframes rotate {
+    0%    { transform: rotate(0deg); }
+    100%  { transform: rotate(360deg); }
+  }
+
+  .Loader {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: solid 3px #888;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: rotate 1s infinite linear;
+    transform-origin: 50% 50%;
+
+    &.large {
+      width: 62px !important;
+      height: 62px !important;
+      border-width: 4px !important;
+    }
+
+    &.medium {
+      width: 48px !important;
+      height: 48px !important;
+    }
+
+    &.small {
+      width: 24px !important;
+      height: 24px !important;
+    }
+  }
+}

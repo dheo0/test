@@ -1,0 +1,139 @@
+@import "../../resources/styles/colors";
+@import "../../resources/styles/mixins";
+@import "../../resources/styles/variables";
+
+.PhotoEditor {
+  width: 100%;
+  height: calc(100% - #{$gnb-height + $option-bar-height});
+  position: relative;
+  background-color: $dark-background;
+
+  %undo-button {
+    width: 86px;
+    height: 32px;
+    padding-left: 17px;
+    display: inline-block;
+    line-height: 32px;
+    font-size: 12px;
+    text-align: center;
+    color: $mild-dark-grey;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .UndoButtonsWrapper {
+    position: absolute;
+    top: 5px;
+    left: 7px + 5px;
+    height: 32px;
+
+    .UndoButtons {
+      &.Undo {
+        @extend %undo-button;
+      }
+
+      &.Redo {
+        @extend %undo-button;
+      }
+    }
+
+    &.withPanelOpen {
+      margin-left: $upload-panel-space;
+    }
+  }
+
+  .ZoomButtons {
+    $zoom-width: 150px;
+    $zoom-height: 30px;
+    $zoom-left-area-width: 106px;
+
+    position: absolute;
+    width: $zoom-width;
+    height: $zoom-height;
+    right: 22px;
+    top: 10px;
+    display: table;
+    color: $white;
+    @include useImage($zoom-width, $zoom-height);
+
+    & > * {
+      user-select: none;
+    }
+
+    & > div {
+      display: table-cell;
+      width: 36px;
+      min-width: 36px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+
+    .Ratio {
+      font-size: 11px;
+    }
+
+    %Button {
+      @include useImage(19px, 19px);
+      cursor: pointer;
+    }
+
+    .Button {
+      @extend %Button;
+    }
+
+    .Reset {
+      @extend %Button;
+      width: 100%;
+    }
+  }
+
+  .ExitButton {
+    $button-size: 56px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    width: $button-size;
+    height: $button-size;
+    @include useImage($button-size, $button-size);
+    font-size: 12px;
+    color: $white;
+    cursor: pointer;
+    user-select: none;
+
+    & > span {
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .CutInfo {
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    color: $mild-dark-grey;
+    user-select: none;
+    left: 137px;
+    top: 10px;
+    width: 500px;
+    &.withPanelOpen {
+      margin-left: $upload-panel-space;
+    }
+  }
+  .Empty {
+    @include absoluteCenter();
+  }
+
+  .Version {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    font-size: 11px;
+  }
+}
+
+.Mobile {
+  background-color: #fff;
+  height: calc(100% - 52px);
+}

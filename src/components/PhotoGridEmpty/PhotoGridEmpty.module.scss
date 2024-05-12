@@ -1,0 +1,54 @@
+@import "../../resources/styles/colors";
+@import "../../resources/styles/mixins";
+
+.DirectUploadButton {
+  @include absoluteCenter();
+  background: none !important;
+  border: none !important;
+}
+
+.PhotoGridEmpty {
+  display: table-cell;
+  vertical-align: middle;
+  width: 236px; // 2020.08.03 Photo Cel 사이즈 크기 216 -> 236
+  height: 277px; // 2020.08.03 Photo Cel 사이즈 크기 254 -> 277
+  border: solid 1px $border;
+  font-size: 12px;
+  text-align: center;
+  color: $mild-dark-grey;
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: -0.6px;
+  line-height: 13px;
+
+  .Content {
+    $icon-size: 54px;
+
+    position: absolute;
+    width: 160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    .Description {
+      margin-top: 16px;
+      font-size: 12px;
+      line-height: 1.67;
+      text-align: center;
+      color: $mild-dark-grey;
+    }
+
+    &.wide {
+      width: 185px;
+    }
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: $icon-size;
+      height: $icon-size;
+      @include useImage($icon-size, $icon-size);
+    }
+  }
+}

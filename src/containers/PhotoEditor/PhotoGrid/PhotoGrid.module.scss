@@ -1,0 +1,156 @@
+@import "../../../resources/styles/colors";
+@import "../../../resources/styles/variables";
+@import "../../../resources/styles/mixins";
+
+$grid-padding-top: 48px;
+$grid-padding-bottom: 72px;
+$grid-padding-left: 56px;
+$grid-padding-right: 72px - $photo-cell-margin;
+$grid-padding: $grid-padding-top $grid-padding-right $grid-padding-bottom
+  $grid-padding-left;
+$grid-padding-horizontal: $grid-padding-left + $grid-padding-right;
+
+$grid-padding-left-narrow: 36px;
+$grid-padding-right-narrow: 52px - $photo-cell-margin;
+$grid-padding-narrow: $grid-padding-top $grid-padding-right-narrow
+  $grid-padding-bottom $grid-padding-left-narrow;
+$grid-padding-horizontal-narrow: $grid-padding-left-narrow +
+  $grid-padding-right-narrow;
+
+$cell-width: 238px; // 2020.08.03 Photo Cel 사이즈 크기 218 -> 238
+$cell-height: 277px; // 2020.08.03 Photo Cel 사이즈 크기 254 -> 277
+
+$cell-margin-right: 20px;
+$cell-margin-bottom: 20px;
+
+$cell-photo-width: 238px; // 2020.08.03 Photo Cel 사이즈 크기 218 -> 238
+$cell-photo-height: 238px; // 2020.08.03 Photo Cel 사이즈 크기 218 -> 238
+
+$cell-option-bar-height: 36px;
+$cell-photo-size-warning-icon-size: 26px;
+$cell-photo-size-warning-icon-margin-bottom: 10px;
+$cell-photo-size-warning-message-content-height: 44px;
+$cell-photo-size-warning-message-padding: 10px;
+
+.PhotoGrid {
+  width: 100%;
+  height: 100%;
+  padding: $grid-padding;
+  position: relative;
+  overflow-y: scroll;
+
+  &.withPanelOpen {
+    padding-left: $upload-panel-space + $grid-padding-left;
+  }
+
+  .GridContent {
+    max-width: calc(100% - #{$grid-padding-horizontal});
+    height: 100%;
+    margin: 0 auto;
+    user-select: none;
+  }
+  &.mobile.withPanelOpen {
+    padding: 16px;
+    .GridContent {
+      max-width: 100%;
+    }
+  }
+}
+
+@mixin insert-media(
+  $ratio,
+  $required-width,
+  $shrinkable-width,
+  $expandable-width
+) {
+  @media (min-width: $shrinkable-width) and (max-width: $expandable-width) {
+    .GridContent {
+      &.#{$ratio} {
+        width: $required-width;
+        max-width: $required-width;
+      }
+    }
+  }
+}
+
+@each $ratio, $factor in $zoom-ratios {
+  .PhotoGrid {
+    &.withPanelOpen {
+      @for $i from 2 through 8 {
+        $photo-cell-wrapper-width: ($photo-cell-width * $factor) +
+          $photo-cell-margin;
+        $required-width: $photo-cell-wrapper-width * $i;
+        $shrinkable-width: $grid-padding-horizontal +
+          $upload-panel-space +
+          $required-width;
+        $expandable-width: $grid-padding-horizontal +
+          $upload-panel-space +
+          (($photo-cell-wrapper-width * ($i + 1)) - 1px);
+
+        @include insert-media(
+          $ratio,
+          $required-width,
+          $shrinkable-width,
+          $expandable-width
+        );
+      }
+    }
+
+    @for $i from 2 through 8 {
+      $photo-cell-wrapper-width: ($photo-cell-width * $factor) +
+        $photo-cell-margin;
+      $required-width: $photo-cell-wrapper-width * $i;
+      $shrinkable-width: $grid-padding-horizontal + $required-width;
+      $expandable-width: $grid-padding-horizontal +
+        (($photo-cell-wrapper-width * ($i + 1)) - 1px);
+
+      @include insert-media(
+        $ratio,
+        $required-width,
+        $shrinkable-width,
+        $expandable-width
+      );
+    }
+  }
+
+  @include respond-to(tablet) {
+    .PhotoGrid {
+      &.withPanelOpen {
+        @for $i from 2 through 8 {
+          $photo-cell-wrapper-width: ($photo-cell-width * $factor) +
+            $photo-cell-margin;
+          $required-width: $photo-cell-wrapper-width * $i;
+          $shrinkable-width: $grid-padding-horizontal-narrow +
+            $upload-panel-space +
+            $required-width;
+          $expandable-width: $grid-padding-horizontal-narrow +
+            $upload-panel-space +
+            (($photo-cell-wrapper-width * ($i + 1)) - 1px);
+
+          @include insert-media(
+            $ratio,
+            $required-width,
+            $shrinkable-width,
+            $expandable-width
+          );
+        }
+      }
+
+      @for $i from 2 through 8 {
+        $photo-cell-wrapper-width: ($photo-cell-width * $factor) +
+          $photo-cell-margin;
+        $required-width: $photo-cell-wrapper-width * $i;
+        $shrinkable-width: $grid-padding-horizontal-narrow + $required-width;
+        $expandable-width: $grid-padding-horizontal-narrow +
+          (($photo-cell-wrapper-width * ($i + 1)) - 1px);
+
+        @include insert-media(
+          $ratio,
+          $required-width,
+          $shrinkable-width,
+          $expandable-width
+        );
+      }
+    }
+  }
+}

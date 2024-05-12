@@ -1,0 +1,6 @@
+{
+  "name": "SmartboxAlbumGridOptionBar",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./SmartboxAlbumGridOptionBar.jsx"
+}

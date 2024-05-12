@@ -1,0 +1,54 @@
+@import '../../resources/styles/colors';
+@import '../../resources/styles/variables';
+@import '../../resources/styles/mixins';
+
+.Cropper {
+  font-size: 18px;
+  user-select: none;
+
+  &.paperFullMode {
+    cursor: move;
+  }
+}
+
+$cell-photo-size-warning-icon-size: 26px;
+$cell-photo-size-warning-message-content-height: 44px;
+$cell-photo-size-warning-message-padding: 10px;
+
+.PrintSizeWarning {
+  @include absoluteCenter();
+  width: 100%;
+  text-align: center;
+  user-select: none;
+
+  .Icon {
+    width: $cell-photo-size-warning-icon-size;
+    height: $cell-photo-size-warning-icon-size;
+  }
+
+  .Message {
+    width: auto;
+    max-width: 184px;
+    height: $cell-photo-size-warning-message-content-height;
+    padding: $cell-photo-size-warning-message-padding;
+    margin: 0 auto;
+    background-color: $white;
+    opacity: 0.8;
+    box-sizing: content-box;
+    box-shadow: 0.5px 0.9px 0 0 $black-16;
+
+    .Title {
+      display: block;
+      font-size: 12px;
+      color: $coral;
+      line-height: 16px;
+    }
+
+    .Content {
+      font-size: 11px;
+      line-height: 1.45;
+      text-align: center;
+      color: #666666;
+    }
+  }
+}

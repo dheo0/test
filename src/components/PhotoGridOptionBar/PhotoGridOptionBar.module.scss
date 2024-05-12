@@ -1,0 +1,18 @@
+@import '../../resources/styles/variables';
+@import '../../resources/styles/mixins';
+
+.PhotoGridOptionBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: $photo-appender-option-bar-height;
+  width: 100%;
+  padding: 0 18px;
+  line-height: $photo-appender-option-bar-height;
+  z-index: 10;
+
+  .Space {
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,94 @@
+@import "../../../../resources/styles/mixins";
+@import "../../../../resources/styles/colors";
+
+.Content {
+  width: 538px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.ButtonWrapper {
+  $content-margin-top: 20px;
+  $content-height: 70px;
+  $button-height: 40px;
+
+  height: $content-height + $button-height;
+  margin-top: $content-margin-top;
+  border-top: solid 1px $black-05;
+
+  .SmartBoxTermsAgreement {
+    position: relative;
+    top: 32px;
+
+    .SmartBoxTermsAgreementCheckBox {
+      margin-right: 10px;
+    }
+
+    .SmartBoxTermsAgreementCheckBoxContent {
+      font-size: 12px;
+      letter-spacing: -0.3px;
+      color: $dark-grey;
+    }
+
+    & > button {
+      width: 64px;
+      height: 18px;
+      padding: 0;
+      font-size: 12px;
+
+      & > span {
+        font-size: 8px;
+      }
+    }
+  }
+
+  .ActionButton {
+    @include buttonStyle(dark);
+    height: 40px !important;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    padding: 13px 32px !important;
+    transform: translateX(-50%);
+    font-size: 13px !important;
+    line-height: 13px !important;
+    user-select: none;
+
+    & [type="file"] {
+      cursor: inherit;
+      display: block;
+      opacity: 0;
+      position: absolute;
+      left: -100px;
+      top: -100px;
+    }
+  }
+}
+
+.LoadingProgress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: $black-30;
+  z-index: 1000;
+
+  .Spinner {
+    @include absoluteCenter();
+  }
+}
+
+.Mobile {
+  width: auto;
+  top: 0;
+  left: 0;
+  position: static;
+  transform: none;
+  h3 {
+    font-size: toRem(20);
+  }
+}

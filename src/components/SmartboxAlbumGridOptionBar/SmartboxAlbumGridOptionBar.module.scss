@@ -1,0 +1,46 @@
+@import '../../resources/styles/variables';
+@import '../../resources/styles/mixins';
+
+.SmartboxAlbumGridOptionBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: $photo-appender-option-bar-height;
+  width: 100%;
+  padding: 0 18px;
+  line-height: $photo-appender-option-bar-height;
+
+  .GoBack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+
+    & > img {
+      width: 8px;
+      height: 13px;
+      margin-right: 20px;
+    }
+
+    & > span {
+      padding-top: 2px;
+      font-size: 18px;
+      letter-spacing: -0.45px;
+      color: $dark-grey;
+    }
+  }
+
+  .AlbumTitle {
+    @include absoluteCenter();
+    font-size: 25px;
+    letter-spacing: -0.63px;
+    color: $dark-grey;
+  }
+
+  .PhotoGridOptionBar {
+    width: 180px;
+    padding: 0;
+  }
+}

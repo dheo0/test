@@ -1,0 +1,6 @@
+{
+  "name": "PhotoCanvas",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./PhotoCanvas.jsx"
+}

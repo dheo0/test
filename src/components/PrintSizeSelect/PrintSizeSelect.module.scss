@@ -1,0 +1,302 @@
+@import '../../resources/styles/colors';
+@import '../../resources/styles/mixins';
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.Control {
+  display: table;
+  width: 140px;
+  cursor: pointer;
+  font-size: 12px;
+
+  .ControlText {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 6px;
+    font-size: inherit;
+    color: $dark-grey;
+  }
+
+  .ControlArrow {
+    display: table-cell;
+    width: 11px;
+    height: 6px;
+    @include useImage(11px, 6px);
+  }
+
+  &[data-showing="true"] {
+    z-index: 101;
+
+    .ControlArrow {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+$area-height: 356px;
+$action-height: 45px;
+$select-height: $area-height + $action-height;
+$select-item-area-width: 354px;
+$select-item-area-width-concise: 204px;
+
+.Select {
+  position: absolute;
+  width: 692px;
+  height: $select-height;
+  background: $white;
+  box-shadow: 2.7px 2.9px 4px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px $border;
+  z-index: 101;
+
+  &.concise {
+    width: $select-item-area-width-concise;
+    height: $area-height;
+
+    .ItemArea {
+      width: $select-item-area-width-concise;
+      height: $area-height;
+    }
+
+    .PreviewArea {
+      display: none;
+    }
+  }
+
+  .ItemArea {
+    display: inline-block;
+    height: $select-height;
+    float: left;
+    width: $select-item-area-width;
+    border-right: solid 1px $border;
+  }
+
+  .PreviewArea {
+    display: inline-block;
+    height: $area-height;
+    float: left;
+    width: calc(100% - #{$select-item-area-width});
+    padding: 20px;
+
+    $title-size: 12px;
+
+    .Title {
+      height: $title-size;
+      line-height: $title-size;
+      font-size: $title-size;
+      color: $mild-dark-grey;
+    }
+
+    .Preview {
+      width: 100%;
+      height: calc(100% - #{$title-size});
+      padding-bottom: 70px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-around;  /* IE fallback */
+      justify-content: space-evenly;
+
+      .Comparator {
+        .ComparatorSize {
+          margin-top: 10px;
+          font-size: 12px;
+          text-align: center;
+          color: $mild-dark-grey;
+        }
+      }
+    }
+  }
+}
+
+.SelectPFYoon {
+  position: absolute;
+  width: 355px;
+  height: $select-height;
+  background: $white;
+  box-shadow: 2.7px 2.9px 4px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px $border;
+  z-index: 101;
+
+  &.concise {
+    width: $select-item-area-width-concise;
+    height: $area-height;
+
+    .ItemArea {
+      width: $select-item-area-width-concise;
+      height: $area-height;
+    }
+
+    .PreviewArea {
+      display: none;
+    }
+  }
+
+  .ItemArea {
+    display: inline-block;
+    height: $select-height;
+    float: left;
+    width: $select-item-area-width;
+    border-right: solid 1px $border;
+  }
+
+  .PreviewArea {
+    display: inline-block;
+    height: $area-height;
+    float: left;
+    width: calc(100% - #{$select-item-area-width});
+    padding: 20px;
+
+    $title-size: 12px;
+
+    .Title {
+      height: $title-size;
+      line-height: $title-size;
+      font-size: $title-size;
+      color: $mild-dark-grey;
+    }
+
+    .Preview {
+      width: 100%;
+      height: calc(100% - #{$title-size});
+      padding-bottom: 70px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-around;  /* IE fallback */
+      justify-content: space-evenly;
+
+      .Comparator {
+        .ComparatorSize {
+          margin-top: 10px;
+          font-size: 12px;
+          text-align: center;
+          color: $mild-dark-grey;
+        }
+      }
+    }
+  }
+}
+
+.SizeTable {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: $area-height;
+
+  &.concise {
+    height: $area-height;
+
+    .Group {
+      .Row {
+        padding: 0 12px;
+
+        .size {
+          width: 60px;
+        }
+
+        .originalPrice {
+          display: none;
+        }
+
+        .currentPrice {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .GroupTitle {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 15px;
+    background-color: $light-grey;
+    font-size: 12px;
+    color: $mild-dark-grey;
+
+    &:not(:first-child) {
+      border-top: solid 1px $border;
+    }
+  }
+
+  .Group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+
+    .Row {
+      display: flex;
+      flex-direction: row;
+      height: 20px;
+      line-height: 20px;
+      padding: 0 20px;
+
+      & > div {
+        display: block;
+        font-size: 12px;
+        color: $mild-dark-grey;
+      }
+
+      .RadioButton {
+        height: 20px;
+      }
+
+      .size {
+        width: 80px;
+        min-width: 80px;
+      }
+
+      .centimeters {
+        flex: 1 1;
+        flex-basis: 0;
+      }
+
+      $price-width: 60px;
+
+      .originalPrice {
+        width: $price-width;
+        min-width: $price-width;
+        max-width: $price-width;
+        color: $coral;
+        text-align: right;
+      }
+
+      .currentPrice {
+        width: $price-width;
+        min-width: $price-width;
+        max-width: $price-width;
+        text-decoration: line-through;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.Actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  height: $action-height;
+
+  & > button {
+    height: 30px !important;
+  }
+
+  .ButtonApplyAll {
+    @include actionButton();
+    margin-right: 10px;
+  }
+
+  .ButtonApplySelected {
+    @include actionButton();
+  }
+}

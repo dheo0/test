@@ -1,0 +1,6 @@
+{
+  "name": "Prices",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./Prices.jsx"
+}

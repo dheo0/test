@@ -1,0 +1,42 @@
+@import '../../resources/styles/colors';
+
+.Counter {
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+
+  & > * {
+    display: inline-block;
+    float: left;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .Minus, .Plus {
+      cursor: not-allowed;
+    }
+  }
+
+  .Value {
+    color: $dark-grey;
+  }
+
+  & > input {
+    width: 29px;
+    height: 20px;
+    margin-left: 0px;
+    padding: 0 0 1px 0;
+    font-size: 12px;
+    text-align: center;
+    color: $dark-grey;
+    //border-width: 0px;
+
+    &[type=number]::-webkit-inner-spin-button, &[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}

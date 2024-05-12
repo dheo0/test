@@ -1,0 +1,301 @@
+@import "../../resources/styles/colors";
+@import "../../resources/styles/variables";
+@import "../../resources/styles/mixins";
+
+$cell-photo-size-warning-icon-size: 26px;
+$cell-photo-size-warning-icon-margin-bottom: 10px;
+$cell-photo-size-warning-message-content-height: 44px;
+$cell-photo-size-warning-message-padding: 10px;
+$cell-photo-size-warning-minimum-size: 18px;
+
+.PhotoCell {
+  width: $photo-cell-width;
+  height: $photo-cell-height + $photo-cell-option-bar-height;
+  margin: 0 $photo-cell-margin $photo-cell-margin 0;
+  display: inline-block;
+  transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+  z-index: 10;
+  float: left;
+  &.smaller {
+    width: 100% !important;
+    margin: 0 0 20px;
+    .PhotoWrapper {
+      width: 100% !important;
+      border-radius: 6px 6px 0 0;
+      background-color: #d9d9d9;
+      .RemoveButton {
+        opacity: 1;
+      }
+    }
+    .OptionBar {
+      border-radius: 0 0 6px 6px;
+    }
+    .DeleteWrap {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: rgba(0, 0, 0, 0.5);
+      span {
+        color: #fff;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: 164%;
+      }
+      .BtnWrap {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 0 30px;
+        margin-top: 40px;
+      }
+      button {
+        border-radius: 6px;
+        color: #fff;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: 100%;
+        width: 120px;
+        padding: 13px 30px;
+        height: auto;
+        border: 0;
+      }
+      .cancel {
+        background-color: #a6a6a7;
+      }
+      .check {
+        background-color: #282828;
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 5.7px 8.2px 12px 0 $black-25;
+    transform: translateY($photo-cell-translate-y);
+
+    .RemoveButton {
+      opacity: 1;
+    }
+  }
+
+  &[data-focused="true"] {
+    box-shadow: 5.7px 8.2px 12px 0 $black-25;
+    transform: translateY($photo-cell-translate-y);
+
+    .Photo .RemoveButton {
+      opacity: 1;
+    }
+  }
+
+  .PhotoWrapper {
+    width: $photo-cell-width;
+    height: $photo-cell-height;
+    position: relative;
+    border: solid 1px $border;
+    cursor: pointer;
+  }
+
+  .PrintSizeWarning {
+    @include absoluteCenter();
+    width: 100%;
+    text-align: center;
+
+    .Icon {
+      width: $cell-photo-size-warning-icon-size;
+      height: $cell-photo-size-warning-icon-size;
+    }
+
+    .Message {
+      width: auto;
+      max-width: 184px;
+      height: $cell-photo-size-warning-message-content-height;
+      padding: $cell-photo-size-warning-message-padding;
+      margin: 0 auto;
+      background-color: $white;
+      opacity: 0.8;
+      box-sizing: content-box;
+      box-shadow: 0.5px 0.9px 0 0 $black-16;
+
+      .Title {
+        display: block;
+        font-size: 12px;
+        color: $coral;
+        line-height: 16px;
+      }
+
+      .Content {
+        font-size: 11px;
+        line-height: 1.45;
+        text-align: center;
+        color: #666666;
+      }
+    }
+  }
+
+  .Checkbox {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+  }
+
+  .RemoveButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    @include useImage(20px, 20px);
+    cursor: pointer;
+    transition: opacity 0.15s ease-in-out;
+  }
+
+  .Debugger {
+    position: absolute;
+    bottom: 2px;
+    left: 6px;
+
+    %block {
+      display: inline-block;
+      padding: 3px;
+      background: $white;
+      border-radius: 3px;
+      border: solid 1px $border;
+
+      &:not(:first-child) {
+        margin-left: 2px;
+      }
+    }
+
+    .UUIDDebugger {
+      font-size: 10px;
+      opacity: 0.8;
+
+      & > div {
+        @extend %block;
+        font-family: monospace;
+        font-weight: bold;
+        font-size: 12px;
+        color: orangered;
+      }
+    }
+
+    .TrimStringDebugger {
+      font-size: 10px;
+      opacity: 0.8;
+
+      & > div {
+        @extend %block;
+
+        & > span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .OptionBar {
+    position: relative;
+    width: 100%;
+    height: $photo-cell-option-bar-height;
+    background-color: $white;
+    border: solid 1px $border;
+    border-top-width: 0;
+
+    .PrintSizeSelectWrapper {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      transform: translateY(-50%);
+      font-size: 12px;
+
+      .PrintSizeSelectControl {
+        width: 100%;
+      }
+
+      .PrintSizeSelectControlArrow {
+        width: 7px;
+        height: 4px;
+        @include useImage(7px, 4px);
+      }
+
+      .PrintSizeSelect {
+        margin-left: 4px;
+      }
+    }
+
+    .Counter {
+      @include absoluteCenter();
+    }
+
+    .RotateButton {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      right: 8px + 2px + 18px;
+      transform: translate(-50%, -50%);
+
+      .Button {
+        @include useImage(14px, 14px);
+        width: 14px;
+        height: 14px;
+        cursor: pointer;
+      }
+    }
+    .CopyButton {
+      position: absolute;
+      border: 0;
+      right: 30px;
+      font-size: toRem(14);
+      top: 50%;
+      transform: translate(0, -50%);
+      background: #fff;
+    }
+
+    .MoreOverButton {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+
+      .Button {
+        @include useImage(18px, 14px);
+        width: 18px;
+        height: 14px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @each $ratio, $factor in $zoom-ratios {
+    &.#{$ratio} {
+      width: $photo-cell-width * $factor;
+      height: ($photo-cell-height * $factor) + $photo-cell-option-bar-height;
+
+      .PhotoWrapper {
+        width: $photo-cell-width * $factor;
+        height: $photo-cell-height * $factor;
+
+        .PrintSizeWarning {
+          .Message {
+            display: if($factor > 0.7, block, none);
+          }
+        }
+      }
+
+      .OptionBar {
+        .RotateButton {
+          visibility: if($factor > 0.7, visible, hidden);
+        }
+      }
+    }
+  }
+}

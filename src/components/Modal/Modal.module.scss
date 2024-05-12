@@ -1,0 +1,134 @@
+@import "../../resources/styles/colors";
+@import "../../resources/styles/mixins";
+
+.BackDrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $black-50;
+  z-index: 2000;
+}
+
+.Modal {
+  @include absoluteCenter();
+  width: auto;
+  min-width: 360px;
+  //max-width: 580px;
+  max-width: 635px;
+  background: $white;
+  box-shadow: 0 3px 7px 0 $black-35;
+  border: solid 1px $border;
+  z-index: 2000;
+
+  .ContentWrapper {
+    padding: 30px;
+  }
+
+  .Title {
+    padding: 30px 40px 0;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.6;
+    letter-spacing: -0.38px;
+    color: $dark-grey;
+  }
+
+  .Message {
+    padding: 30px 40px 20px;
+    font-size: 13px;
+    line-height: 1.69;
+    letter-spacing: -0.33px;
+    text-align: left;
+    word-break: keep-all;
+    color: $mild-dark-grey2;
+
+    &.hasTitle {
+      padding-top: 16px;
+    }
+  }
+
+  .Action {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px 20px 30px;
+
+    & > button {
+      min-width: 80px;
+    }
+
+    & > * {
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .SrcWarning {
+    padding: 30px 40px;
+  }
+
+  .ConfirmIcon {
+    padding: 0px 35px 10px 35px;
+    //cursor: pointer;
+  }
+}
+
+.Mobile {
+  border-radius: 6px;
+  padding: 34px 10px 10px;
+  width: 91%;
+  min-width: 0;
+  max-width: 343px;
+  .Title {
+    padding: 0;
+    text-align: center;
+    font-size: toRem(20);
+    line-height: toRem(32);
+    font-weight: 600;
+  }
+  .Message {
+    padding: 0;
+    text-align: center;
+    font-size: toRem(16);
+    font-weight: 400;
+    color: #6b6b6b;
+    letter-spacing: -0.24px;
+    &.hasTitle {
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+  }
+  .Mtable {
+    width: 100%;
+  }
+  .Action {
+    padding: 0 10px;
+    button {
+      width: 49.2%;
+      min-width: 0;
+      border-radius: 6px;
+      height: 45px;
+      background-color: #a6a6a7;
+      color: #fff;
+      font-size: toRem(14);
+    }
+    & > * {
+      &:not(:first-child) {
+        border: 0;
+        background-color: #282828;
+      }
+    }
+  }
+}
+
+.Cancel {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 24px;
+  height: 24px;
+}

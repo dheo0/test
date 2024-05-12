@@ -1,0 +1,131 @@
+@import "../../resources/styles/mixins";
+@import "../../resources/styles/variables";
+
+.GroupedPhotoGrid {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.PhotoGroup {
+  &:not(:last-child) {
+    margin-bottom: 35px;
+  }
+  .GroupWrap {
+    max-height: 435px;
+    overflow-y: auto;
+  }
+
+  .Label {
+    .Check {
+      margin-right: 10px;
+    }
+
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #222222;
+  }
+
+  .Partition {
+    white-space: nowrap;
+    &.Mobile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 2%;
+    }
+  }
+
+  &.Mobile {
+    min-height: 51.9vh;
+    margin-top: 13vh;
+    &.SmartGroup {
+      margin-top: 0;
+      min-height: 0;
+      .GroupWrap {
+        max-height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 9px;
+      }
+    }
+  }
+  @media (orientation: landscape) {
+    &.Mobile {
+      min-height: 630px;
+    }
+  }
+}
+.UploadPhotoButton {
+  display: block;
+  background-color: #282828;
+  color: #fff;
+  width: 264px;
+  height: 45px;
+  padding: 13px 30px;
+  margin: 0 auto;
+  border-radius: 6px;
+  .Text {
+    font-size: toRem(14);
+  }
+}
+
+.PhotoCell {
+  $photo-cell-width: 190px;
+  $photo-cell-height: 190px;
+
+  @include useImage(contain, contain);
+  width: $photo-cell-width;
+  height: $photo-cell-height;
+  display: inline-block;
+  position: relative;
+  margin: 0 15px 15px 0;
+  background-color: #cccccc;
+
+  &:hover {
+    .Mask {
+      opacity: 1;
+    }
+  }
+
+  &.isSelected {
+    .Mask {
+      opacity: 1;
+    }
+  }
+
+  &.hasError {
+    .Mask {
+      opacity: 1;
+    }
+  }
+
+  .Mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    background-color: $black-25;
+    transition: opacity 0.1s ease-in-out;
+    cursor: pointer;
+
+    .ErrorWrapper {
+      line-height: 190px;
+      text-align: center;
+      color: orangered;
+    }
+  }
+
+  .Checkbox {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+  }
+}

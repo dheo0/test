@@ -1,0 +1,17 @@
+@import '../../../resources/styles/mixins';
+
+.Wrapper {
+  text-align: center;
+  font-size: 12px;
+  color: $white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.FilteredPhotoCell {
+  @include useImage(contain, contain);
+}
+
+.FilterTitle {
+  margin-top: 7px;
+}

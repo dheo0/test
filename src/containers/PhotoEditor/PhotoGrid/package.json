@@ -1,0 +1,6 @@
+{
+  "name": "PhotoGrid",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./PhotoGrid.jsx"
+}

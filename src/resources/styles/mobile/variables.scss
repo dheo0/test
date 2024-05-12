@@ -1,0 +1,54 @@
+$page-min-width: 1024px;
+$page-min-height: 768px;
+
+$gnb-padding: 7px;
+$gnb-content-height: 45px;
+$gnb-height: $gnb-content-height + ($gnb-padding * 2) + 1px;
+
+$option-bar-padding: 9px;
+$option-bar-content-height: 30px;
+$option-bar-height: $option-bar-content-height + ($option-bar-padding * 2) + 1px;
+
+$upload-panel-content-width: 327px;
+$upload-panel-side-border-width: 7px;
+$upload-panel-space: $upload-panel-content-width +
+  $upload-panel-side-border-width;
+
+$print-option-panel-width: 170px;
+$print-option-panel-height: 274px;
+
+$zoom-ratios: (
+  z05: 0.5,
+  z06: 0.6,
+  z07: 0.7,
+  z08: 0.8,
+  z09: 0.9,
+  z10: 1,
+  z11: 1.1,
+  z12: 1.2,
+  z13: 1.3,
+  z14: 1.4,
+  z15: 1.5,
+  z16: 1.6,
+  z17: 1.7,
+  z18: 1.8,
+  z19: 1.9,
+  z20: 2,
+);
+
+$photo-appender-header-height: 51px;
+$photo-appender-option-bar-height: 44px;
+$photo-appender-action-bar-height: 52px;
+
+$photo-cell-width: 238px; // 2020.08.03 Photo Cel 사이즈 크기 218 -> 238
+$photo-cell-height: 238px; // 2020.08.03 Photo Cel 사이즈 크기 218 -> 238
+$photo-cell-margin: 20px;
+$photo-cell-translate-y: 0;
+$photo-cell-option-bar-height: 36px;
+
+//noinspection CssInvalidPseudoSelector,CssUnknownProperty
+:export {
+  PHOTO_GRID_CELL_TRANSLATE_Y: $photo-cell-translate-y;
+  PRINT_OPTION_PANEL_WIDTH: $print-option-panel-width;
+  PRINT_OPTION_PANEL_HEIGHT: $print-option-panel-height;
+}

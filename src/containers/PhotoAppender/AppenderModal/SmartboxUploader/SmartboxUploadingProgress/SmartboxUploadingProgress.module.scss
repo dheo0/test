@@ -1,0 +1,135 @@
+@import "../../../../../resources/styles/colors";
+@import "../../../../../resources/styles/variables";
+
+$height: 100px;
+$height-expended: 270px;
+$bottom: $photo-appender-action-bar-height + 10px;
+$left: 10px;
+$progress-bar-bottom: -10px;
+$z-index: 1000;
+
+.Backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $black-50;
+  z-index: $z-index;
+}
+
+.Wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: $height + $bottom;
+  width: $upload-panel-content-width;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: translateY(50px);
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  transition-delay: 0s;
+  opacity: 0;
+  z-index: $z-index + 1;
+
+  &.disappear {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  &.appear {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  &.expended {
+    height: $height-expended + $bottom;
+
+    .PhotoUploadingProgress {
+      height: $height-expended;
+    }
+
+    .ContentWrapper {
+      .ProgressText {
+        bottom: 158px;
+      }
+    }
+  }
+}
+
+.PhotoUploadingProgress {
+  height: $height;
+  width: 300px;
+  margin-left: $left;
+  margin-bottom: $bottom;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border-radius: 5px;
+  box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px $border;
+  background-color: $white;
+
+  .TitleWrapper {
+    display: flex;
+    flex-direction: row;
+
+    .Title {
+      margin-top: 2px;
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: -0.38px;
+      color: #222222;
+    }
+  }
+
+  .ContentWrapper {
+    position: absolute;
+    height: 30px;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    margin-top: 12px;
+
+    .ProgressText {
+      position: relative;
+      width: 200px;
+      padding-left: 20px;
+      font-size: 13px;
+      color: #777777;
+    }
+
+    button {
+      position: absolute;
+      width: 50px;
+      right: 20px;
+      bottom: 0;
+    }
+  }
+}
+
+.ProgressBar {
+  position: relative;
+  bottom: $progress-bar-bottom;
+  left: 20px;
+  width: 200px;
+  height: 4px;
+  border-radius: 2px;
+  box-shadow: inset 1px 1.7px 2px 0 rgba(9, 2, 4, 0.1);
+  background-color: #eeeeef;
+
+  .Bar {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    box-shadow: inset 0px -2px 2px 0 rgba(9, 2, 4, 0.1);
+    background-color: #ffd431;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
+  }
+}

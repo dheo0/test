@@ -1,0 +1,6 @@
+{
+  "name": "GroupedPhotoGrid",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./GroupedPhotoGrid.jsx"
+}

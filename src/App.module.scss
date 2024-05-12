@@ -1,0 +1,40 @@
+@import "./resources/styles/colors";
+@import "./resources/styles/variables";
+@import "./resources/styles/mixins";
+
+.App {
+  height: 100%;
+  width: 100%;
+  min-width: $page-min-width;
+  min-height: $page-min-height;
+  overflow: hidden;
+
+  .LoaderWrapper {
+    @include cover();
+
+    .Spinner {
+      @include absoluteCenter();
+    }
+  }
+
+  .ErrorWrapper {
+    @include cover();
+
+    .Error {
+      @include absoluteCenter();
+      color: $coral;
+    }
+  }
+}
+
+.Tooltip {
+  &::after {
+    display: none;
+  }
+}
+
+.Mobile {
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-y: auto;
+}

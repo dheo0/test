@@ -1,0 +1,21 @@
+@import '../../resources/styles/colors';
+
+.OptionHelpModal {
+  position: absolute;
+  z-index: 2000;
+
+  .Checkbox {
+    position: absolute;
+    right: 12px;
+    bottom: 27px;
+  }
+}
+
+.Backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}

@@ -1,0 +1,234 @@
+@import "./colors";
+@import "./responsive";
+
+@mixin only-for-ie {
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+@mixin defaultButton() {
+  height: 30px;
+  padding-left: 12px;
+  padding-right: 12px;
+  background-color: $light-button;
+  border: solid 1px $border;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.6px;
+  color: $light-button-text;
+  cursor: pointer;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+
+  &:hover,
+  &:focus:hover {
+    border: solid 1px #666666;
+    color: $light-button-text-hover;
+    background-color: $light-button-hover;
+  }
+
+  &:active,
+  &:active:focus {
+    background-color: $light-button;
+  }
+
+  &:disabled {
+    background-color: $light-button-disabled;
+    border-color: $light-button-disabled-border;
+    color: $light-button-disabled-text;
+    cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    background-color: $light-button-disabled;
+    border-color: $light-button-disabled-border;
+    color: $light-button-disabled-text;
+    cursor: not-allowed;
+  }
+}
+
+@mixin buttonStyle($type) {
+  @include defaultButton();
+
+  @if $type == dark {
+    background-color: $dark-button;
+    border-color: $dark-button;
+    color: $dark-button-text;
+
+    &:hover,
+    &:focus:hover {
+      background-color: $dark-button-hover;
+      border-color: $dark-button;
+      color: $dark-button-text;
+    }
+
+    &:active,
+    &:active:focus {
+      border-color: $dark-button;
+      color: $dark-button-text;
+    }
+
+    &:disabled:hover {
+      background-color: $light-button-disabled;
+      border-color: $light-button-disabled-border;
+      color: $light-button-disabled-text;
+    }
+  } @else if $type == grey {
+    background-color: $grey-button;
+    border-color: $grey-button;
+    color: $grey-button-text;
+
+    &:hover,
+    &:focus:hover {
+      background-color: $grey-button-hover;
+      border-color: $grey-button-hover;
+      color: $grey-button-text;
+    }
+
+    &:active,
+    &:active:focus {
+      border-color: $grey-button-hover;
+      color: $grey-button-text;
+    }
+  } @else if $type == orange {
+    background-color: $orange-button;
+    border-color: $orange-button;
+    color: $orange-button-text;
+
+    &:hover,
+    &:focus:hover {
+      background-color: $orange-button-hover;
+      border-color: $orange-button-hover;
+      color: $orange-button-text-hover;
+    }
+
+    &:active,
+    &:active:focus {
+      border-color: $orange-button-hover;
+      color: $orange-button-text-hover;
+    }
+  } @else if $type == coral {
+    background-color: $coral;
+    border-color: $coral;
+    color: $white;
+
+    &:hover,
+    &:focus:hover {
+      background-color: $coral-hover;
+      border-color: $coral-hover;
+      color: $white;
+    }
+
+    &:active,
+    &:active:focus {
+      border-color: $coral;
+      color: $white;
+    }
+
+    &:disabled,
+    &:disabled:hover {
+      background-color: $coral;
+      border-color: $coral;
+      color: $white;
+    }
+  } @else if $type == coralLight {
+    background-color: $white;
+    border-color: $coral;
+    color: $coral;
+
+    &:hover,
+    &:focus:hover {
+      background-color: $white;
+      border-color: $coral-hover;
+      color: $coral-hover;
+    }
+
+    &:active,
+    &:active:focus {
+      border-color: $coral;
+      color: $coral;
+    }
+
+    &:disabled,
+    &:disabled:hover {
+      background-color: $white;
+      border-color: $coral;
+      color: $coral;
+    }
+  }
+}
+
+@mixin actionButton($minWidth: 130px) {
+  min-width: $minWidth;
+  box-shadow: 1.8px 2.4px 2px 0 $black-05;
+}
+
+@mixin useImage($width: auto, $height: auto, $image: none) {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: $width, $height;
+  background-image: $image;
+}
+
+@mixin absoluteCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin cover() {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin paperGloss() {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.3) 25%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.4) 60%,
+    rgba(255, 255, 255, 0) 75%,
+    rgba(255, 255, 255, 0) 85%,
+    rgba(255, 255, 255, 0.3) 90%,
+    rgba(255, 255, 255, 0) 95%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@mixin placeholder() {
+  &::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    @content;
+  }
+
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    @content;
+  }
+
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    @content;
+  }
+
+  &:placeholder-shown {
+    /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+    @content;
+  }
+}

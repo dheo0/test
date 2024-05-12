@@ -1,0 +1,6 @@
+{
+  "name": "SwitchOption",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./SwitchOption.jsx"
+}

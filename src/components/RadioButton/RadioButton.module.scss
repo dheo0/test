@@ -1,0 +1,26 @@
+@import '../../resources/styles/mixins';
+
+@mixin radio($size: 14px) {
+  width: $size;
+  height: $size;
+  background-size: $size, $size;
+}
+
+.RadioButton {
+  cursor: pointer;
+
+  .Button {
+    @include radio(14px);
+    display: inline-block;
+    margin-right: 3px;
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+  }
+
+  &.large {
+    .Button {
+      @include radio(18px);
+    }
+  }
+}

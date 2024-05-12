@@ -1,0 +1,184 @@
+@import '../../resources/styles/colors';
+@import '../../resources/styles/variables';
+@import '../../resources/styles/mixins';
+
+$close-wrapper-size: 18px;
+$close-wrapper-padding: 9px;
+$close-wrapper-padding-bottom: 0;
+$close-wrapper-height: $close-wrapper-size + ($close-wrapper-padding + $close-wrapper-padding-bottom);
+$print-size-select-control-height: 30px;
+$row-height: 20px;
+$row-padding-top: 8px;
+
+.Backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1900;
+}
+
+.PrintOptionPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $print-option-panel-width;
+  height: $print-option-panel-height;
+  background-color: $white;
+  box-shadow: 5.7px 8.2px 12px 0 $black-25;
+  z-index: 1990;
+
+  .CloseWrapper {
+    height: $close-wrapper-height;
+    padding: $close-wrapper-padding $close-wrapper-padding $close-wrapper-padding-bottom;
+    text-align: right;
+    line-height: $close-wrapper-size;
+
+    .CloseButton {
+      @include useImage($close-wrapper-size, $close-wrapper-size);
+      width: $close-wrapper-size;
+      height: $close-wrapper-size;
+      display: inline-block;
+      cursor: pointer;
+    }
+  }
+
+  .PrintSizeSelectWrapper {
+    .PrintSizeSelectControl {
+      width: 100%;
+      padding: 6px 15px;
+      height: $print-size-select-control-height;
+    }
+
+    .PrintSizeSelect {
+      margin-left: 4px;
+    }
+  }
+
+  .OptionsWrapper {
+    $margin: 8px;
+
+    width: $print-option-panel-width - ($margin * 2);
+    height: $print-option-panel-height - $print-size-select-control-height - $close-wrapper-height - $margin;
+    margin: 0 $margin $margin $margin;
+
+    .Row {
+      width: 100%;
+      padding-left: 10px;
+      padding-top: $row-padding-top;
+      line-height: $row-height;
+    }
+  }
+}
+
+%Field {
+  line-height: $row-height;
+
+  &.disabled {
+    cursor: not-allowed;
+
+    & > * {
+      pointer-events: none;
+      opacity: 0.4;
+    }
+  }
+}
+
+.SwitchField {
+  @extend %Field;
+
+  & > div {
+    display: inline-block;
+    padding: 0 6px;
+    line-height: $row-height;
+    border: solid 0 $border;
+    font-size: 12px;
+    text-align: center;
+    color: $inactive-text;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  & > :first-child {
+    color: $mild-dark-grey;
+    border-color: $dark-border;
+    border-width: 1px;
+  }
+
+  & > :last-child {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  &[data-checked="true"] {
+    & > :first-child {
+      border-color: $border;
+      border-right-color: $dark-border;
+      color: $inactive-text;
+    }
+
+    & > :last-child {
+      border-color: $dark-border;
+      color: $mild-dark-grey;
+    }
+  }
+}
+
+.CheckField {
+  @extend %Field;
+  display: inline-block;
+
+  &[data-checked="true"] {
+    & > div {
+      color: $mild-dark-grey;
+    }
+  }
+
+  & > div {
+    font-size: 12px;
+    color: $inactive-text;
+    cursor: pointer;
+    user-select: none;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      width: 15px;
+      height: 15px;
+      margin-left: 6px;
+      background-size: 15px;
+      background-position: center;
+    }
+  }
+}
+
+.DateField {
+  line-height: $row-height;
+  display: inline-block;
+  font-size: 12px;
+  color: $inactive-text;
+  user-select: none;
+
+  & > input {
+    width: 24px;
+    height: 20px;
+    margin-left: 4px;
+    padding: 0 3px;
+    font-size: 12px;
+    color: $dark-grey;
+
+    &:first-child {
+      width: 40px;
+      margin-left: 0;
+      padding: 0 4px;
+    }
+
+    &[type=number]::-webkit-inner-spin-button, &[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}

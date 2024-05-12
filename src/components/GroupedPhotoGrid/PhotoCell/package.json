@@ -1,0 +1,6 @@
+{
+  "name": "PhotoCell",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./PhotoCell.jsx"
+}

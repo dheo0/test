@@ -1,0 +1,97 @@
+@import '../../../../../resources/styles/colors';
+@import '../../../../../resources/styles/variables';
+@import '../../../../../resources/styles/mixins';
+
+.AlbumFrontPage {
+  overflow-y: scroll;
+
+  section {
+    display: block;
+    padding-bottom: 30px;
+
+    &:not(:first-child) {
+      padding-top: 50px;
+      border-top: solid 1px $border;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      padding: 0;
+      font-size: 14px;
+      font-weight: normal;
+      color: $dark-grey;
+    }
+
+    .SectionItemWrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+
+      & > .SectionItem {
+        margin-bottom: 20px;
+
+        &:not(:last-child) {
+          margin-right: 14px;
+        }
+      }
+    }
+
+    .SectionItem {
+      width: 190px;
+      cursor: pointer;
+      user-select: none;
+
+      .Square {
+        display: block;
+        position: relative;
+        width: 190px;
+        height: 190px;
+        border-radius: 2px;
+        border: solid 1px $border;
+        background-color: $grey;
+
+        & > * {
+          @include absoluteCenter();
+        }
+
+        &.inverted {
+          border-radius: 2px;
+          border: solid 1px $border;
+          background-color: $white;
+        }
+      }
+
+      .AlbumCover {
+        @include useImage($width: 190px, $height: 190px);
+        display: block;
+        position: relative;
+        width: 190px;
+        height: 190px;
+        background-color: $grey;
+      }
+
+      .title {
+        display: block;
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 13px;
+        letter-spacing: -0.33px;
+        color: $dark-grey;
+      }
+
+      .subTitle {
+        display: block;
+        margin-top: 8px;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.3px;
+        color: $mild-dark-grey;
+      }
+    }
+  }
+}

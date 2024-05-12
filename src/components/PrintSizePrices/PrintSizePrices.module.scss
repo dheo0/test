@@ -1,0 +1,119 @@
+@import "../../resources/styles/colors";
+@import "../../resources/styles/mixins";
+
+.PrintSizePrices {
+  position: absolute;
+  width: 242px;
+  background: $white;
+  box-shadow: 2.7px 2.9px 4px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px $border;
+  z-index: 2000;
+  &.Mobile {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: none;
+    border: 0;
+
+    .Title {
+      color: #333;
+      font-weight: 600;
+      font-size: toRem(20);
+      line-height: 100%;
+      height: auto;
+      letter-spacing: -0.2px;
+      background-color: transparent;
+      text-align: center;
+      padding: 34px 16px 10px;
+    }
+
+    .Wrapper {
+      position: absolute;
+      background-color: #fff;
+      width: calc(100% - 30px);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 6px;
+      height: 95vh;
+      max-height: 460px;
+      overflow: hidden;
+      .Table {
+        max-height: calc(100% - 65px);
+        overflow-y: auto;
+      }
+      .Row {
+        margin-bottom: 10px;
+        & > div {
+          font-size: toRem(16);
+        }
+        .centimeters {
+          font-size: toRem(16);
+        }
+        .currentPrice {
+          width: auto;
+          max-width: 100%;
+          min-width: 0;
+        }
+      }
+    }
+    .Close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .Title {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 15px;
+    background-color: $light-grey;
+    font-size: 12px;
+    color: $mild-dark-grey;
+  }
+
+  .Table {
+    padding: 10px;
+  }
+}
+
+$line-height: 21px;
+$size-width: 50px;
+$price-width: 55px;
+
+.Row {
+  display: flex;
+  flex-direction: row;
+  height: $line-height;
+  line-height: $line-height;
+
+  & > div {
+    display: block;
+    font-size: 12px;
+    color: $mild-dark-grey;
+  }
+
+  .size {
+    width: $size-width;
+    min-width: $size-width;
+  }
+
+  .centimeters {
+    flex: 1 1;
+    flex-basis: 0;
+  }
+
+  .currentPrice {
+    width: $price-width;
+    min-width: $price-width;
+    max-width: $price-width;
+    color: $coral;
+    text-align: right;
+  }
+}

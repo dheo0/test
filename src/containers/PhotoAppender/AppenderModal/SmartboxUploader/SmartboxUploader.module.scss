@@ -1,0 +1,269 @@
+@import "../../../../resources/styles/colors";
+@import "../../../../resources/styles/variables";
+@import "../../../../resources/styles/mixins";
+
+$sidebar-width: 50px;
+$tab-button-width: $sidebar-width;
+$tab-button-height: 58px;
+$tab-image-width: 25px;
+$tab-image-height: 23px;
+$tab-title-height: 12px;
+$tab-image-title-margin: 5px;
+
+.Header {
+  width: 100%;
+  height: $photo-appender-header-height;
+  border-bottom: solid 1px $border;
+  font-size: 18px;
+  line-height: 50px;
+  text-align: center;
+  color: $dark-grey;
+  user-select: none;
+  &.Mbox {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -10px;
+    border-bottom: 0;
+  }
+}
+
+.UploaderButton {
+  @include defaultButton();
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  right: 61px;
+  width: 120px;
+  height: 30px !important;
+  padding: 0 12px !important;
+}
+
+.LoaderWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $black-25;
+
+  .Spinner {
+    @include absoluteCenter();
+  }
+}
+
+.PhotoGridOptionBar {
+  position: fixed;
+  top: $photo-appender-header-height;
+  left: $sidebar-width;
+  width: calc(100% - #{$sidebar-width});
+  border-bottom: solid 1px $border;
+
+  &.Mobile {
+    width: 100%;
+    left: 0;
+    padding: 0;
+    top: 91px;
+  }
+}
+
+.Sidebar {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: $photo-appender-header-height;
+  width: $sidebar-width;
+  height: calc(
+    100% - #{$photo-appender-header-height + $photo-appender-action-bar-height}
+  );
+  background-color: $grey;
+  border-right: solid 1px $border;
+  &.Mobile {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    justify-content: space-between;
+    .Tab {
+      height: 40px;
+      width: 50%;
+      &.isSelected {
+        .contentWrapper {
+          border-bottom: 2px solid #171717;
+          .title {
+            color: #171717;
+            font-weight: 600;
+          }
+        }
+      }
+      .contentWrapper {
+        width: 100%;
+        border-top: 1px solid #e1e1e1;
+        .image {
+          display: none;
+        }
+        .title {
+          font-size: toRem(16);
+          line-height: 164%;
+          font-weight: 400;
+          color: #a6a6a7;
+          height: 100%;
+          margin-top: 0;
+          line-height: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .Tab {
+    position: relative;
+    width: $tab-button-width;
+    height: $tab-button-height;
+    background-color: transparent;
+    border-bottom: solid 1px $border;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease-in-out;
+
+    &.isSelected {
+      background-color: $white;
+    }
+
+    .contentWrapper {
+      @include absoluteCenter();
+      width: $tab-image-width;
+      height: $tab-image-height + $tab-image-title-margin + $tab-title-height;
+
+      .image {
+        display: block;
+        width: $tab-image-width;
+        height: $tab-image-height;
+      }
+
+      .title {
+        display: block;
+        margin-top: $tab-image-title-margin;
+        font-size: 11px;
+        line-height: $tab-title-height;
+        text-align: center;
+        color: $dark-grey;
+      }
+    }
+  }
+}
+
+%content {
+  display: block;
+  position: absolute;
+  left: $sidebar-width;
+  width: calc(100% - #{$sidebar-width});
+  height: calc(
+    100% - #{$photo-appender-header-height + $photo-appender-option-bar-height +
+      $photo-appender-action-bar-height}
+  );
+  padding: 20px 12px;
+}
+
+.Mobile {
+  .GroupedPhotoGrid {
+    width: 100%;
+  }
+}
+
+.GroupedPhotoGrid {
+  @extend %content;
+  top: $photo-appender-header-height + $photo-appender-option-bar-height;
+  &.smartbox {
+    width: 100%;
+    left: 0;
+  }
+  &.smaller {
+    padding: 20px 10px;
+  }
+
+  .GroupedPhotoGridCell {
+    &.smaller {
+      width: 132px;
+      height: 132px;
+    }
+  }
+}
+
+.AlbumFrontPage {
+  @extend %content;
+  top: $photo-appender-header-height;
+  height: calc(
+    100% - #{$photo-appender-header-height + $photo-appender-action-bar-height}
+  );
+}
+
+.UploaderActionBar {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: $photo-appender-action-bar-height;
+  background-color: $dark-grey;
+  &.Mobile {
+    width: 100%;
+    height: 49px;
+  }
+
+  .Counter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 220px;
+    height: $photo-appender-action-bar-height;
+    padding: 0 26px;
+    font-size: 14px;
+    color: $inactive-text;
+
+    b {
+      color: $white;
+    }
+  }
+
+  .Divider {
+    width: 1px;
+    height: 24px;
+    opacity: 0.2;
+    background-color: #999999;
+  }
+
+  .AlbumActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1 0 auto;
+    height: $photo-appender-action-bar-height;
+    padding: 0 26px;
+    line-height: $photo-appender-action-bar-height;
+  }
+
+  .ButtonWrapper {
+    display: table-cell;
+    height: $photo-appender-action-bar-height;
+    padding: 6px;
+    white-space: nowrap;
+
+    button {
+      height: 40px;
+      min-width: 112px;
+      padding: 0 20px;
+      font-size: 12px;
+
+      &:first-child {
+        margin-right: 6px;
+      }
+    }
+  }
+}

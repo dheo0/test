@@ -1,0 +1,133 @@
+@import '../../resources/styles/colors';
+@import '../../resources/styles/variables';
+@import '../../resources/styles/mixins';
+
+.OptionBar {
+  min-width: $page-min-width;
+  padding: $option-bar-padding;
+  background-color: $white;
+  border-bottom: solid 1px $border;
+  overflow: hidden;
+  user-select: none;
+
+  .Content {
+    height: $option-bar-content-height;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.Divider {
+  display: inline-block;
+  height: 15px;
+  margin: 0 18px;
+}
+
+.SizeSelectorControl {
+  height: $option-bar-content-height;
+  min-width: 136px;
+}
+
+.ButtonApplyAll {
+  min-width: 130px;
+  margin-left: 25px;
+}
+
+.ButtonApplySelected {
+  min-width: 130px;
+  margin-left: 10px;
+}
+
+$section-height: 30px;
+$section-title-info-icon-size: 14px;
+$section-title-height: $section-title-info-icon-size;
+$switch-option-height: 15px;
+
+%Section {
+  flex: 0 0 auto;
+  display: inline-block;
+  height: $section-height;
+  white-space: nowrap;
+
+  & > * {
+    display: inline-block;
+    float: left;
+  }
+
+  .SectionTitle {
+    display: inline-block;
+    height: $section-height;
+    margin-right: 8px;
+    font-size: 11px;
+    letter-spacing: -0.3px;
+    color: $dark-grey;
+    line-height: $section-height;
+    float: left;
+
+    &.isContent {
+      &:hover, &.isHovering {
+        color: $yellow2;
+      }
+    }
+  }
+
+  @include respond-to(tablet) {
+    .SectionTitle {
+      font-size: 10px;
+    }
+  }
+}
+
+.SwitchOptionSection {
+  @extend %Section;
+
+  .SwitchOption {
+    height: $section-height;
+    margin-top: $switch-option-height / 2;
+  }
+}
+
+.CheckboxSection {
+  @extend %Section;
+  cursor: pointer;
+
+  .Checkbox {
+    height: $section-height;
+    line-height: $section-height;
+  }
+}
+
+.CounterSection {
+  @extend %Section;
+
+  .Counter {
+    height: $section-height;
+    margin-top: $switch-option-height / 2;
+  }
+}
+
+@include respond-to(tablet) {
+  .Divider {
+    margin: 0 12px;
+  }
+
+  .SizeSelectorControl {
+    min-width: 132px;
+    width: 132px;
+  }
+
+  .ButtonApplyAll {
+    margin-left: 8px !important;
+    padding: 0 4px !important;
+    min-width: 88px !important;
+    font-size: 10px !important;
+  }
+
+  .ButtonApplySelected {
+    margin-left: 5px !important;
+    padding: 0 4px !important;
+    min-width: 100px !important;
+    font-size: 10px !important;
+  }
+}

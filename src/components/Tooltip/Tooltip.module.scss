@@ -1,0 +1,15 @@
+@import "../../resources/styles/colors";
+
+.Tooltip {
+  padding: 5px 10px !important;
+  background-color: white !important;
+  border: solid 1px $border !important;
+  border-radius: 4px !important;
+  box-shadow: 5.7px 8.2px 12px 0 $black-25 !important;
+  color: $dark-grey !important;
+  white-space: nowrap;
+
+  &::after {
+    display: none !important;
+  }
+}

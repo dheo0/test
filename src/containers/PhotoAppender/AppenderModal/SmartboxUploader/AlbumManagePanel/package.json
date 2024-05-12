@@ -1,0 +1,6 @@
+{
+  "name": "AlbumManagePanel",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./AlbumManagePanel.jsx"
+}

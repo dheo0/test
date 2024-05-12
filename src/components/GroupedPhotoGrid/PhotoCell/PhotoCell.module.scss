@@ -1,0 +1,95 @@
+@import "../../../resources/styles/mixins";
+@import "../../../resources/styles/variables";
+
+.PhotoCell {
+  $photo-cell-width: 190px;
+  $photo-cell-height: 190px;
+  @include useImage(contain, contain);
+  width: $photo-cell-width;
+  height: $photo-cell-height;
+  display: inline-block;
+  position: relative;
+  margin: 0 15px 15px 0;
+
+  &:hover {
+    .Mask {
+      opacity: 1;
+    }
+
+    .RemoveButton {
+      opacity: 1;
+    }
+  }
+
+  &.isSelected {
+    .Mask {
+      opacity: 1;
+    }
+  }
+
+  &.hasError {
+    .Mask {
+      opacity: 1;
+    }
+  }
+
+  .Mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    background-color: $black-25;
+    transition: opacity 0.1s ease-in-out;
+    cursor: pointer;
+
+    .ErrorWrapper {
+      @include absoluteCenter();
+      width: calc(100% - #{5px * 2});
+      text-align: center;
+      padding: 10px;
+      background-color: $white;
+      opacity: 0.7;
+      white-space: normal;
+      box-shadow: 0.5px 0.9px 0 0 $black-16;
+      font-size: 10px;
+      font-weight: bold;
+      color: $coral;
+      user-select: none;
+    }
+  }
+
+  .LoaderWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $black-25;
+
+    .Loader {
+      position: absolute;
+      left: ($photo-cell-height / 2) - (62px / 2);
+      top: ($photo-cell-height / 2) - (62px / 2);
+    }
+  }
+
+  .Checkbox {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+  }
+
+  .RemoveButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    @include useImage(20px, 20px);
+    cursor: pointer;
+    transition: opacity 0.15s ease-in-out;
+  }
+}
