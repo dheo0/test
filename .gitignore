@@ -1,0 +1,29 @@
+# 환경 변수
+.env
+.env.local
+.env.*.local
+
+# 의존성
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# 빌드 결과물
+client/build/
+dist/
+
+# 변환 임시 파일
+output/
+uploads/
+
+# 로그
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
