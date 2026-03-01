@@ -28,7 +28,8 @@ app.use('/api', exportRouter);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 4000;
-if (process.env.NODE_ENV !== 'test') {
+// Vercel 환경에서는 listen() 호출 불필요 (api/index.js에서 export로 처리)
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
 
