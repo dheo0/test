@@ -1,6 +1,0 @@
-{
-  "name": "TransitionPrompt",
-  "version": "0.1.0",
-  "private": true,
-  "main": "./TransitionPrompt.jsx"
-}
