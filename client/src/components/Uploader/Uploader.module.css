@@ -1,0 +1,94 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dropZone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  min-height: 200px;
+}
+
+.dropZone:hover,
+.dragOver {
+  border-color: var(--color-primary);
+  background: #f0f0ff;
+}
+
+.hasFile {
+  padding: 12px;
+  min-height: unset;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.hint {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.sub {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.thumbnail {
+  max-width: 100%;
+  max-height: 260px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.fileName {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.error {
+  font-size: 0.85rem;
+  color: var(--color-error);
+  text-align: center;
+}
+
+.convertBtn {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.convertBtn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.convertBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
