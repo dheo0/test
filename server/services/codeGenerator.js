@@ -2,8 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { extractCSSVariables } from './cssExtractor.js';
-
-const OUTPUT_DIR = process.env.OUTPUT_DIR || './output';
+import { getOutputDir } from '../utils/env.js';
 
 // IR type → HTML 시맨틱 태그 매핑
 const TYPE_TAG = {
@@ -74,7 +73,8 @@ function buildJS(node, handlers) {
  */
 export async function generateCode(ir) {
   const id = uuidv4();
-  const dir = path.join(OUTPUT_DIR, id);
+  // 로컬: ./output/{id}  |  Vercel: /tmp/output/{id}
+  const dir = path.join(getOutputDir(), id);
   fs.mkdirSync(dir, { recursive: true });
 
   // HTML
