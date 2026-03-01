@@ -1,6 +1,0 @@
-{
-  "name": "AppenderSelector",
-  "version": "0.1.0",
-  "private": true,
-  "main": "./AppenderSelector.jsx"
-}
