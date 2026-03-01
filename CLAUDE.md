@@ -1,6 +1,7 @@
 # CLAUDE.md — AI 어시스턴트 가이드
 
 이 파일은 Claude 등 AI 어시스턴트가 이 프로젝트를 이해하고 올바르게 기여하기 위한 가이드입니다.
+각 영역별 상세 개발 규칙은 하위 `Skills.md`를 참조하세요.
 
 ---
 
@@ -10,11 +11,25 @@
 
 ---
 
+## 영역별 상세 가이드 (Skills.md)
+
+각 폴더에 위치한 `Skills.md`에 해당 영역의 구체적인 개발 패턴, 컴포넌트 명세, 서비스 로직, 테스트 규칙이 기술되어 있습니다.
+
+| 영역 | 파일 | 주요 내용 |
+|---|---|---|
+| 클라이언트 (React UI) | [`client/Skills.md`](./client/Skills.md) | 컴포넌트 작성 규칙, API 호출 패턴, 스타일링, 다운로드/포맷 유틸 |
+| 서버 (Node.js API) | [`server/Skills.md`](./server/Skills.md) | 라우트 구조, IR 데이터 포맷, 서비스 명세, Figma 클라이언트, 미들웨어 |
+
+> 새로운 기능을 추가하거나 버그를 수정하기 전에 **반드시 해당 영역의 Skills.md를 먼저 확인**하세요.
+
+---
+
 ## 레포지토리 구조
 
 ```
 /
 ├── client/                        # React 기반 변환 도구 UI
+│   ├── Skills.md                  # 클라이언트 개발 가이드 ★
 │   └── src/
 │       ├── components/            # 재사용 가능한 UI 컴포넌트
 │       │   ├── Uploader/          # 이미지 업로드 드래그앤드롭
@@ -32,6 +47,7 @@
 │           └── format.js          # 생성된 코드 prettier 포맷
 │
 ├── server/                        # Node.js + Express API 서버
+│   ├── Skills.md                  # 서버 개발 가이드 ★
 │   ├── routes/
 │   │   ├── convert.js             # POST /api/convert
 │   │   ├── figma.js               # POST /api/figma
@@ -91,11 +107,6 @@ routes/convert.js → POST /api/convert
 services/imageAnalyzer.js → OpenAI Vision API 호출
         ↓
 중간 표현(IR) JSON 생성
-  {
-    type: 'container' | 'text' | 'image' | 'button',
-    styles: { ... },
-    children: [ ... ]
-  }
         ↓
 services/codeGenerator.js → IR를 HTML/CSS/JS 문자열로 변환
         ↓
@@ -103,6 +114,8 @@ output/{id}/ 에 index.html, style.css, script.js 저장
         ↓
 클라이언트에 변환 ID 응답
 ```
+
+> IR 데이터 구조 상세 → [`server/Skills.md`](./server/Skills.md#중간-표현ir-데이터-구조)
 
 ### Figma → 코드
 
@@ -120,6 +133,8 @@ services/codeGenerator.js → IR → HTML/CSS/JS 생성
 output/{id}/ 저장 후 ID 응답
 ```
 
+> Figma 노드 타입 매핑 상세 → [`server/Skills.md`](./server/Skills.md#figmaparserjsservicesfigmaparserjs)
+
 ---
 
 ## API 엔드포인트 명세
@@ -133,89 +148,13 @@ output/{id}/ 저장 후 ID 응답
 
 ---
 
-## 중간 표현(IR) 데이터 구조
-
-`imageAnalyzer.js`와 `figmaParser.js` 모두 동일한 IR 형식을 출력합니다.
-`codeGenerator.js`는 이 IR만 입력으로 받습니다.
-
-```js
-// IR 노드 타입 정의
-{
-  type: 'container' | 'text' | 'image' | 'button' | 'input' | 'icon',
-  id: 'string',           // 고유 식별자 (CSS 클래스명 생성에 사용)
-  styles: {
-    width: '100px',
-    height: '200px',
-    backgroundColor: '#fff',
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '8px',
-    padding: '16px',
-    borderRadius: '8px',
-    fontSize: '14px',
-    fontWeight: '400',
-    color: '#333',
-    // ... 기타 CSS 속성
-  },
-  content: 'string',      // type=text일 때 텍스트 내용
-  src: 'string',          // type=image일 때 이미지 경로
-  children: [ /* 재귀적 IR 노드 */ ]
-}
-```
-
----
-
-## 코드 생성 규칙 (codeGenerator.js)
-
-새로운 코드 생성 로직을 추가하거나 수정할 때 반드시 따라야 할 규칙입니다.
-
-### HTML 생성
-- 모든 요소는 시맨틱 태그 우선 사용 (`<header>`, `<main>`, `<section>`, `<button>` 등)
-- 시맨틱 태그가 불명확하면 `<div>` 사용
-- 클래스명은 IR의 `id` 필드 기반으로 자동 생성 (예: `node-abc123`)
-- `alt` 속성은 이미지에 항상 포함
-
-### CSS 생성
-- 색상, 폰트 크기, 간격 등 디자인 토큰은 `:root` CSS 변수로 추출
-- BEM 네이밍 적용: `.block__element--modifier`
-- `!important` 사용 금지
-- 인라인 스타일 생성 금지 — 반드시 외부 `style.css`에 작성
-
-### JS 생성
-- 인터랙션이 없는 요소는 JS 생성 안 함
-- Vanilla JS만 사용 (jQuery, 외부 라이브러리 금지)
-- 이벤트는 이벤트 위임 패턴으로 `document`에 등록
-- `var` 사용 금지, `const`/`let`만 사용
-
----
-
-## Figma API 사용 시 주의사항
-
-- `figmaClient.js`의 Axios 인스턴스를 반드시 재사용 (직접 `axios.get` 호출 금지)
-- API 호출 실패 시 `errorHandler.js`가 처리하므로 라우트에서 별도 try/catch 불필요
-- Figma `CANVAS` 타입 노드는 파싱 대상이 아님 — `FRAME` 또는 `COMPONENT`만 처리
-- `figmaParser.js`에서 지원하지 않는 Figma 노드 타입은 무시하고 경고 로그 출력
-
-### 지원 Figma 노드 타입
-
-| Figma 타입 | IR 타입 | HTML 태그 |
-|---|---|---|
-| FRAME / GROUP | container | `<div>` |
-| TEXT | text | `<p>` / `<span>` / `<hN>` |
-| RECTANGLE | container | `<div>` |
-| IMAGE | image | `<img>` |
-| VECTOR / ELLIPSE | icon | `<svg>` |
-| COMPONENT / INSTANCE | container | `<div>` |
-
----
-
 ## 환경 변수
 
 | 변수명 | 필수 | 설명 |
 |---|---|---|
 | `PORT` | 선택 | 서버 포트 (기본값: 4000) |
 | `OPENAI_API_KEY` | 필수 | OpenAI Vision API 키 |
-| `FIGMA_ACCESS_TOKEN` | 필수* | Figma Personal Access Token (*Figma 기능 사용 시) |
+| `FIGMA_ACCESS_TOKEN` | 조건부 필수 | Figma Personal Access Token |
 | `UPLOAD_DIR` | 선택 | 업로드 임시 경로 (기본값: `./uploads`) |
 | `OUTPUT_DIR` | 선택 | 변환 결과 저장 경로 (기본값: `./output`) |
 | `CLIENT_ORIGIN` | 선택 | CORS 허용 Origin (기본값: `http://localhost:3000`) |
@@ -231,7 +170,7 @@ output/{id}/ 저장 후 ID 응답
 | React 컴포넌트 | PascalCase | `CodeEditor.jsx` |
 | 서버 서비스 / 유틸 | camelCase | `figmaParser.js` |
 | 서버 라우트 | camelCase | `convert.js` |
-| CSS / SCSS 파일 | camelCase | `codeEditor.module.css` |
+| CSS 모듈 | camelCase | `codeEditor.module.css` |
 
 ---
 
@@ -252,7 +191,7 @@ feat:     새로운 기능 추가
 fix:      버그 수정
 refactor: 기능 변경 없이 코드 구조 개선
 style:    포맷, 세미콜론 등 동작 무관한 변경
-docs:     문서 수정 (README, CLAUDE.md 등)
+docs:     문서 수정 (README, CLAUDE.md, Skills.md 등)
 test:     테스트 추가 또는 수정
 chore:    빌드 설정, 패키지 변경
 ```
@@ -261,22 +200,30 @@ chore:    빌드 설정, 패키지 변경
 
 ## AI 어시스턴트를 위한 작업 지침
 
+### 작업 전 체크리스트
+
+1. 수정할 코드가 `client/`에 속하면 → [`client/Skills.md`](./client/Skills.md) 확인
+2. 수정할 코드가 `server/`에 속하면 → [`server/Skills.md`](./server/Skills.md) 확인
+3. 변환 파이프라인에 영향을 주는 변경이라면 → 위 파이프라인 흐름도 재확인
+
 ### 새 변환 기능 추가 시
-1. `figmaParser.js` 또는 `imageAnalyzer.js`에서 IR 생성 로직 수정
-2. `codeGenerator.js`에서 새 IR 타입에 대한 HTML/CSS 생성 로직 추가
-3. 해당 라우트(`routes/convert.js` 또는 `routes/figma.js`)는 가급적 수정하지 않음
+
+1. `server/services/figmaParser.js` 또는 `imageAnalyzer.js`에서 IR 생성 로직 수정
+2. `server/services/codeGenerator.js`에서 새 IR 타입에 대한 HTML/CSS 생성 로직 추가
+3. 라우트(`routes/convert.js`, `routes/figma.js`)는 가급적 수정하지 않음
+4. `server/__tests__/`에 유닛 테스트 추가 → [`server/Skills.md 테스트 섹션`](./server/Skills.md#테스트-작성-규칙) 참고
 
 ### 클라이언트 컴포넌트 수정 시
-- `services/` 폴더의 함수를 통해서만 API 호출 (컴포넌트에서 직접 Axios 호출 금지)
-- 상태 관리는 React 훅(`useState`, `useEffect`) 사용
 
-### 테스트 작성 시
-- 서버 유닛 테스트: `server/__tests__/` 디렉토리, Jest 사용
-- IR 변환 함수(`figmaParser`, `codeGenerator`)는 반드시 단위 테스트 작성
-- API 라우트 테스트는 `supertest` 사용
+- `client/services/` 함수를 통해서만 API 호출 (컴포넌트에서 직접 Axios 호출 금지)
+- 상태 관리는 React 훅(`useState`, `useEffect`) 사용
+- 컴포넌트 명세 → [`client/Skills.md 컴포넌트별 핵심 명세`](./client/Skills.md#컴포넌트별-핵심-명세) 참고
 
 ### 절대 하지 말아야 할 것
+
 - `.env` 파일에 실제 API 키 하드코딩 후 커밋
 - `output/` 디렉토리 내 파일 커밋
 - `codeGenerator.js`에서 특정 프레임워크(React, Vue 등) 의존 코드 생성
 - 생성된 HTML에 인라인 `style=""` 속성 사용
+- `figmaClient.js` 대신 직접 `axios.get` 으로 Figma API 호출
+- 컴포넌트에서 직접 Axios 호출 (`client/services/` 우회)
