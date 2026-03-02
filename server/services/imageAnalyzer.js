@@ -1,7 +1,7 @@
 import fs from 'fs';
-import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const SYSTEM_PROMPT = `You are a UI analysis expert. Analyze the given UI screenshot and return a JSON object representing the layout as an Intermediate Representation (IR).
 
@@ -45,25 +45,25 @@ export async function analyzeImage(imagePath) {
   const mimeMap = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp' };
   const mimeType = mimeMap[ext] || 'image/png';
 
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4o',
+  const response = await anthropic.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 4096,
+    system: SYSTEM_PROMPT,
     messages: [
-      { role: 'system', content: SYSTEM_PROMPT },
       {
         role: 'user',
         content: [
           {
-            type: 'image_url',
-            image_url: { url: `data:${mimeType};base64,${base64}` },
+            type: 'image',
+            source: { type: 'base64', media_type: mimeType, data: base64 },
           },
           { type: 'text', text: 'Analyze this UI and return the IR JSON.' },
         ],
       },
     ],
-    max_tokens: 4096,
   });
 
-  const raw = response.choices[0].message.content.trim();
+  const raw = response.content[0].text.trim();
 
   try {
     // JSON 블록 마크다운 제거 후 파싱

@@ -1,9 +1,11 @@
 import multer from 'multer';
 import path from 'path';
+import { getUploadDir } from '../utils/env.js';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, process.env.UPLOAD_DIR || './uploads');
+    // 로컬: ./uploads  |  Vercel: /tmp/uploads
+    cb(null, getUploadDir());
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);

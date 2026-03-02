@@ -2,19 +2,19 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
-import path from 'path';
 
 import convertRouter from './routes/convert.js';
 import figmaRouter from './routes/figma.js';
 import exportRouter from './routes/export.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import { IS_VERCEL, IS_TEST, getUploadDir, getOutputDir } from './utils/env.js';
 
 const app = express();
 
-// 업로드/출력 디렉토리 자동 생성
-const uploadDir = process.env.UPLOAD_DIR || './uploads';
-const outputDir = process.env.OUTPUT_DIR || './output';
-[uploadDir, outputDir].forEach((dir) => {
+// 환경별 디렉토리 자동 생성
+// - 로컬: ./uploads, ./output
+// - Vercel: /tmp/uploads, /tmp/output (서버리스는 /tmp 외 쓰기 불가)
+[getUploadDir(), getOutputDir()].forEach((dir) => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
@@ -27,9 +27,10 @@ app.use('/api', exportRouter);
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 4000;
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// 로컬 개발 서버 실행 (Vercel·테스트 환경에서는 실행 안 함)
+if (!IS_VERCEL && !IS_TEST) {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => console.log(`[local] Server running on http://localhost:${PORT}`));
 }
 
 export default app;

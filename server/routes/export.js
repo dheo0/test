@@ -2,11 +2,12 @@ import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
 import archiver from 'archiver';
+import { getOutputDir as resolveOutputDir } from '../utils/env.js';
 
 const router = Router();
 
-const getOutputDir = (id) =>
-  path.join(process.env.OUTPUT_DIR || './output', id);
+// 로컬: ./output/{id}  |  Vercel: /tmp/output/{id}
+const getOutputDir = (id) => path.join(resolveOutputDir(), id);
 
 // ZIP 다운로드
 router.get('/export/:id', (req, res, next) => {
